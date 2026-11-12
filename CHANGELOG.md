@@ -4,6 +4,7 @@
 
 First release. Named ColorPickerPlus (it was ReactColorPicker while it was being built).
 
+- `ColorPickerPlus`: the module the repository is listed under; installs (and uninstalls) the input.
 - `InputfieldColorPickerPlus`: a text input inside `<color-picker-plus>`, with the thirteen pickers
   of react-color 2.19.3 ported to plain TypeScript and DOM (no React, no jQuery): Sketch, Chrome,
   Photoshop, Compact, Circle, Twitter, Block, Github, Swatches, Material, Hue, Slider, Alpha.

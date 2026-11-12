@@ -27,7 +27,10 @@ function check($name, $ok, $info = '') {
 }
 
 $modules = wire('modules');
-check('module installed', $modules->isInstalled('InputfieldColorPickerPlus'));
+check('module installed', $modules->isInstalled('ColorPickerPlus') && $modules->isInstalled('InputfieldColorPickerPlus'));
+$main = ColorPickerPlus::getModuleInfo();
+check('ColorPickerPlus: same version as the Inputfield, installs it', $main['version'] === InputfieldColorPickerPlus::version && $main['installs'] === 'InputfieldColorPickerPlus');
+check('module files named after their classes, at the top level', is_file($dir . 'ColorPickerPlus.module.php') && is_file($dir . 'InputfieldColorPickerPlus.module.php'));
 $info = InputfieldColorPickerPlus::getModuleInfo();
 check('version matches the CHANGELOG', strpos((string) file_get_contents($dir . 'CHANGELOG.md'), '## ' . $info['version']) !== false, $info['version']);
 check('version matches package.json', json_decode(file_get_contents($dir . 'package.json'), true)['version'] === $info['version']);

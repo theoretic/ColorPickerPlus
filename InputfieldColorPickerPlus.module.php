@@ -60,7 +60,7 @@ class InputfieldColorPickerPlus extends InputfieldText implements InputfieldHasT
 
 	public static function getModuleInfo() {
 		return array(
-			'title' => 'ColorPickerPlus',
+			'title' => 'ColorPickerPlus Inputfield',
 			'version' => self::version,
 			'summary' => 'Colour input with the pickers of react-color (Sketch, Chrome, Photoshop, Compact, Circle, Twitter and more), without React or jQuery.',
 			'icon' => 'tint',

@@ -15,12 +15,15 @@ of Bridge and does not need it.
 
 1. Put this folder in `site/modules/ColorPickerPlus/` (copy, or a junction on a local machine).
    Sites need only the committed files; `node_modules/` is for building.
-2. Modules > Refresh, install **ColorPickerPlus** (`InputfieldColorPickerPlus`).
+2. Modules > Refresh, install **ColorPickerPlus**. It installs the colour input,
+   **ColorPickerPlus Inputfield** (`InputfieldColorPickerPlus`), and uninstalling it removes both.
+   Code that only needs the input (a module's config screen) may install `InputfieldColorPickerPlus`
+   on its own.
 
 ## Use it on a page field
 
-Create a **Text** field, and on its *Details* tab set **Input module** to *Colour picker
-(react-color)*. Save, then on the *Input* tab pick a picker from the gallery: each picker is shown as a
+Create a **Text** field, and on its *Details* tab set **Input module** to *ColorPickerPlus
+Inputfield*. Save, then on the *Input* tab pick a picker from the gallery: each picker is shown as a
 screenshot, and only the chosen one runs live under the gallery.
 
 Settings:
