@@ -1,4 +1,4 @@
-# ReactColorPicker
+# ColorPickerPlus
 
 A colour picker Inputfield for ProcessWire with the thirteen pickers of
 [react-color](https://github.com/casesandberg/react-color): Sketch, Chrome, Photoshop, Compact,
@@ -13,9 +13,9 @@ of Bridge and does not need it.
 
 ## Install
 
-1. Put this folder in `site/modules/ReactColorPicker/` (copy, or a junction on a local machine).
+1. Put this folder in `site/modules/ColorPickerPlus/` (copy, or a junction on a local machine).
    Sites need only the committed files; `node_modules/` is for building.
-2. Modules > Refresh, install **Colour picker (react-color)** (`InputfieldReactColorPicker`).
+2. Modules > Refresh, install **ColorPickerPlus** (`InputfieldColorPickerPlus`).
 
 ## Use it on a page field
 
@@ -41,7 +41,7 @@ The value is a plain string. Empty is `''`. Templates use it directly: `<div sty
 ## Use it in code (module config screens, forms)
 
 ```php
-$f = $modules->get('InputfieldReactColorPicker');
+$f = $modules->get('InputfieldColorPickerPlus');
 $f->attr('name', 'accent');
 $f->label = 'Accent';
 $f->val('#ff6900');                // or '' for no colour
@@ -55,24 +55,24 @@ $inputfields->add($f);
 (the old value stays, with an error). To check a value elsewhere:
 
 ```php
-InputfieldReactColorPicker::normalize('#ABC');                  // '#aabbcc'
-InputfieldReactColorPicker::normalize('rgba(255,0,0,.5)', 'hex', true); // '#ff000080'
-InputfieldReactColorPicker::normalize('nope');                  // null
-InputfieldReactColorPicker::normalize('');                      // ''
+InputfieldColorPickerPlus::normalize('#ABC');                  // '#aabbcc'
+InputfieldColorPickerPlus::normalize('rgba(255,0,0,.5)', 'hex', true); // '#ff000080'
+InputfieldColorPickerPlus::normalize('nope');                  // null
+InputfieldColorPickerPlus::normalize('');                      // ''
 ```
 
 ## In the browser
 
-The field is a text input inside `<rcp-color-picker>`. The input keeps the value and the form posts it,
+The field is a text input inside `<color-picker-plus>`. The input keeps the value and the form posts it,
 so the field works even without scripts. Each change sets the input's value and dispatches a bubbling
 `input` event on it. Letting go (pointer up, a click, a typed value, the clear button) also dispatches
 `change`. The element can be used without ProcessWire too:
 
 ```html
-<script type="module" src="/site/modules/ReactColorPicker/assets/dist/rcp.js"></script>
-<rcp-color-picker picker="twitter" allow-empty empty-label="Default" placeholder="#2563eb">
+<script type="module" src="/site/modules/ColorPickerPlus/assets/dist/color-picker-plus.js"></script>
+<color-picker-plus picker="twitter" allow-empty empty-label="Default" placeholder="#2563eb">
   <input type="text" name="accent" value="#ff6900">
-</rcp-color-picker>
+</color-picker-plus>
 ```
 
 Attributes: `picker`, `mode` (`inline`), `alpha`, `format`, `allow-empty`, `empty-label`,
@@ -105,9 +105,9 @@ node scripts/serve.mjs 8095             # tests/demo.html: every picker, ?inline
 On a Bridge sandbox (`<bridge>` is the Bridge repository, `<sandbox>` its `sandbox/<site>`):
 
 ```bash
-php tests/sandbox-fixture.php <bridge> <sandbox>            # page /rcp-test/, prints RCP_ID, RCP_FIELD_ID
+php tests/sandbox-fixture.php <bridge> <sandbox>            # page /cpp-test/, prints CPP_ID, CPP_FIELD_ID
 php tests/smoke.php <bridge> <sandbox>
-BRIDGE=<bridge> BASE=http://localhost:8089 RCP_ID=.. RCP_FIELD_ID=.. PW=<playwright-core> node tests/browser-check.cjs
+BRIDGE=<bridge> BASE=http://localhost:8089 CPP_ID=.. CPP_FIELD_ID=.. PW=<playwright-core> node tests/browser-check.cjs
 php tests/sandbox-fixture.php <bridge> <sandbox> --remove
 ```
 

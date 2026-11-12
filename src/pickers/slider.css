@@ -4,9 +4,9 @@
 .cell { box-sizing: border-box; width: 20%; padding-right: 1px; }
 .swatch {
 	display: block; width: 100%; height: 12px; padding: 0; margin: 0; border: 0; cursor: pointer;
-	background: var(--rcp-swatch); outline: none;
+	background: var(--cpp-swatch); outline: none;
 }
 .cell:first-child .swatch { border-radius: 2px 0 0 2px; }
 .cell:last-child .swatch { border-radius: 0 2px 2px 0; }
 .swatch.active { transform: scaleY(1.8); border-radius: 3.6px / 2px; }
-.swatch:focus-visible { box-shadow: 0 0 0 2px var(--rcp-ring); }
+.swatch:focus-visible { box-shadow: 0 0 0 2px var(--cpp-ring); }

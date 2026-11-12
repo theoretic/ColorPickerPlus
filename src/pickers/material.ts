@@ -17,7 +17,7 @@ export default {
 		return {
 			el: root,
 			update(st) {
-				setVar(root, '--rcp-hex', st.hex);
+				setVar(root, '--cpp-hex', st.hex);
 				f.hex.set(st.hex);
 				f.r.set(st.rgb.r);
 				f.g.set(st.rgb.g);

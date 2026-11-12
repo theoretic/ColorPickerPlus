@@ -4,12 +4,12 @@ import { fileURLToPath } from 'node:url';
 /**
  * Builds assets/dist/ (committed, so sites need no node):
  *
- *   rcp.js                 the <rcp-color-picker> element, colour model and popover
+ *   color-picker-plus.js                 the <color-picker-plus> element, colour model and popover
  *   pickers/<name>-*.js    one chunk per picker, imported only when a field uses that picker
  *   pickers/parts-*.js     shared parts (saturation, hue, alpha, inputs, swatches)
  *
  * A multi-entry app build rather than lib mode (lib mode does not minify ES whitespace); base './'
- * and no modulepreload helper keep every chunk URL relative to rcp.js, wherever the module lives.
+ * and no modulepreload helper keep every chunk URL relative to color-picker-plus.js, wherever the module lives.
  * CSS is imported as strings (?inline) and adopted by each shadow root, so no <style> or style=
  * attribute reaches the page (CSP style-src, Trusted Types).
  */
@@ -27,7 +27,7 @@ export default defineConfig({
 		},
 		modulePreload: false,
 		rollupOptions: {
-			input: { rcp: fileURLToPath(new URL('./src/index.ts', import.meta.url)) },
+			input: { 'color-picker-plus': fileURLToPath(new URL('./src/index.ts', import.meta.url)) },
 			preserveEntrySignatures: 'allow-extension',
 			output: {
 				format: 'es',

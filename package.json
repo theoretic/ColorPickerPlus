@@ -1,5 +1,5 @@
 {
-  "name": "reactcolorpicker",
+  "name": "colorpickerplus",
   "version": "1.0.0",
   "description": "Colour picker Inputfield for ProcessWire: the pickers of react-color as a native web component",
   "private": true,

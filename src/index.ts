@@ -1,10 +1,10 @@
 /**
- * <rcp-color-picker>: wraps a text input and opens one of react-color's pickers for it.
+ * <color-picker-plus>: wraps a text input and opens one of react-color's pickers for it.
  *
- *   <rcp-color-picker picker="sketch" alpha format="hex" allow-empty empty-label="Default"
+ *   <color-picker-plus picker="sketch" alpha format="hex" allow-empty empty-label="Default"
  *       placeholder="#3b82f6" colors='["#ff0000","#00ff00"]' label="Accent" strings='{"Hue":"Тон"}'>
  *     <input type="text" name="accent" value="#ff6900">
- *   </rcp-color-picker>
+ *   </color-picker-plus>
  *
  * The input stays in light DOM and holds the value, so a form posts it and the field works without
  * scripts. Only the picker named in `picker` is imported (assets/dist/pickers/<name>-*.js), when
@@ -354,7 +354,7 @@ export class ColorPickerElement extends HTMLElement {
 			}
 		}).catch((err) => {
 			this.#loading = null;
-			console.error('rcp-color-picker: picker ' + name + ' failed to load', err);
+			console.error('color-picker-plus: picker ' + name + ' failed to load', err);
 		});
 		return this.#loading;
 	}
@@ -370,7 +370,7 @@ export class ColorPickerElement extends HTMLElement {
 	}
 
 	#focusPicker(): void {
-		const target = this.#mount.querySelector<HTMLElement>('.rcp-active, [tabindex="0"], input, button');
+		const target = this.#mount.querySelector<HTMLElement>('.cpp-active, [tabindex="0"], input, button');
 		target?.focus({ preventScroll: true });
 	}
 
@@ -428,7 +428,7 @@ export class ColorPickerElement extends HTMLElement {
 
 	#render(): void {
 		this.#control.classList.toggle('empty', this.#empty);
-		this.#chip.style.setProperty('--rcp-chip', cssColor(this.#state));
+		this.#chip.style.setProperty('--cpp-chip', cssColor(this.#state));
 		this.#chip.title = this.#empty ? this.getAttribute('empty-label') || this.t('Default') : this.value;
 		this.#clear.hidden = !this.allowEmpty || this.#empty;
 		this.toggleAttribute('empty', this.#empty);
@@ -436,10 +436,10 @@ export class ColorPickerElement extends HTMLElement {
 	}
 }
 
-if(!customElements.get('rcp-color-picker')) customElements.define('rcp-color-picker', ColorPickerElement);
+if(!customElements.get('color-picker-plus')) customElements.define('color-picker-plus', ColorPickerElement);
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'rcp-color-picker': ColorPickerElement;
+		'color-picker-plus': ColorPickerElement;
 	}
 }

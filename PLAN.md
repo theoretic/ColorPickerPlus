@@ -1,4 +1,4 @@
-# ReactColorPicker: plan (OKed by the owner 2026-11-12; 1.0.0 built the same day)
+# ColorPickerPlus: plan (OKed by the owner 2026-11-12; 1.0.0 built the same day)
 
 A ProcessWire Inputfield that reproduces the pickers of
 [react-color](https://github.com/casesandberg/react-color) (MIT, Case Sandberg) as a native web
@@ -16,7 +16,7 @@ component. Wanted first by the Bridge Customizer's colour fields: a hex value wi
    editable inputs, swatch, checkerboard): Sketch, Chrome, Photoshop, Compact, Circle, Twitter,
    Block, Github, Swatches, Material, Hue, Slider, Alpha. The field setting `picker` chooses one.
    Smaller alternative: Sketch, Chrome, Compact, Circle, Twitter, Swatches (the rest later).
-3. **Shape: Inputfield only** (`InputfieldReactColorPicker`), usable as the input of a plain
+3. **Shape: Inputfield only** (`InputfieldColorPickerPlus`), usable as the input of a plain
    Text field (FieldtypeText's "Input type") and from module config screens. A dedicated
    Fieldtype is not planned.
 
@@ -30,7 +30,7 @@ component. Wanted first by the Bridge Customizer's colour fields: a hex value wi
   opens the picker, default on; off = picker inline).
 - Markup: wrapper keeps the upstream `Inputfield` classes; inside, a light-DOM
   `<input type='text' name=…>` (the form value, works without JS) wrapped by
-  `<rcp-color-picker>`. The element dispatches bubbling `input` while dragging and `change` on
+  `<color-picker-plus>`. The element dispatches bubbling `input` while dragging and `change` on
   commit, from the light-DOM input.
 - Bridge: implements `BridgeComponent` (interface check copied as MapMarkerPlus does), so the
   legacy stack is not loaded for it; also works under AdminThemeUikit through a classic loader

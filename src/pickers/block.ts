@@ -20,8 +20,8 @@ export default {
 		return {
 			el: root,
 			update(st, empty) {
-				setVar(root, '--rcp-head', st.hex);
-				setVar(root, '--rcp-head-fg', contrasting(st.hex));
+				setVar(root, '--cpp-head', st.hex);
+				setVar(root, '--cpp-head-fg', contrasting(st.hex));
 				label.textContent = st.hex;
 				focusable(markActive(colors, empty ? null : st.hex));
 				hex.set(st.hex);

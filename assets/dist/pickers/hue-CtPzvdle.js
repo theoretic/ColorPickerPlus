@@ -1,0 +1,1 @@
+import{g as e,e as t,p}from"./parts-CL9AHhIn.js";import"../color-picker-plus.js";const r={css:p+".hue-picker{position:relative;width:316px;height:16px}",bare:!0,create(p){const r=e(p,{pointer:"round",input:e=>({h:e,s:1,l:.5,a:1})});return{el:t("div","hue-picker",r.el),update:e=>r.update(e)}}};export{r as default};

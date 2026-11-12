@@ -21,7 +21,7 @@ try {
 	for(const name of PICKERS) {
 		await page.goto(`${base}?picker=${name}&inline=1`);
 		await page.evaluate(() => window.demoReady);
-		const picker = page.locator('rcp-color-picker .picker > *').first();
+		const picker = page.locator('color-picker-plus .picker > *').first();
 		await picker.waitFor();
 		await picker.screenshot({ path: out(`assets/previews/${name}.png`), omitBackground: true });
 		console.log('preview', name);

@@ -36,7 +36,7 @@ export default {
 			el('div', 'saturation', sat.el),
 			el('div', 'controls',
 				el('div', 'sliders', el('div', 'hue', h.el), host.options.alpha && el('div', 'alpha', a.el)),
-				el('div', 'color', el('div', 'rcp-checker'), active)),
+				el('div', 'color', el('div', 'cpp-checker'), active)),
 			el('div', 'fields', fields.hex.el, fields.r.el, fields.g.el, fields.b.el, host.options.alpha && fields.a.el),
 			presets.childElementCount ? presets : null);
 		return {
@@ -45,7 +45,7 @@ export default {
 				sat.update(st);
 				h.update(st);
 				a.update(st);
-				setVar(active, '--rcp-active', cssColor(st));
+				setVar(active, '--cpp-active', cssColor(st));
 				fields.hex.set(st.hex.replace('#', ''));
 				fields.r.set(st.rgb.r);
 				fields.g.set(st.rgb.g);

@@ -1,0 +1,1 @@
+import{a as e,e as p,p as a}from"./parts-CL9AHhIn.js";import"../color-picker-plus.js";const r={css:a+".alpha-picker{position:relative;width:316px;height:16px}",bare:!0,create(a){const r=e(a,{pointer:"round"});return{el:p("div","alpha-picker",r.el),update:e=>r.update(e)}}};export{r as default};

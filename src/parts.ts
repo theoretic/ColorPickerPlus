@@ -104,9 +104,9 @@ export interface Part {
 
 /** Saturation (x) and value (y) square; pointer: 'circle' (Sketch), 'ring' (Chrome, Photoshop) */
 export function saturation(host: PickerHost, pointer: 'circle' | 'ring' = 'circle'): Part {
-	const dot = el('div', 'rcp-sat-' + pointer);
-	const ptr = el('div', 'rcp-pointer', dot);
-	const area = el('div', 'rcp-sat', el('div', 'rcp-sat-white'), el('div', 'rcp-sat-black'), ptr);
+	const dot = el('div', 'cpp-sat-' + pointer);
+	const ptr = el('div', 'cpp-pointer', dot);
+	const area = el('div', 'cpp-sat', el('div', 'cpp-sat-white'), el('div', 'cpp-sat-black'), ptr);
 	area.tabIndex = 0;
 	area.setAttribute('role', 'slider');
 	area.setAttribute('aria-roledescription', host.options.t('2D slider'));
@@ -129,10 +129,10 @@ export function saturation(host: PickerHost, pointer: 'circle' | 'ring' = 'circl
 	return {
 		el: area,
 		update(st) {
-			setVar(area, '--rcp-hue', round(st.hsl.h));
+			setVar(area, '--cpp-hue', round(st.hsl.h));
 			setVar(ptr, 'left', round(st.hsv.s * 100) + '%');
 			setVar(ptr, 'top', round(100 - st.hsv.v * 100) + '%');
-			dot.classList.toggle('rcp-dark', st.hsl.l > 0.5);
+			dot.classList.toggle('cpp-dark', st.hsl.l > 0.5);
 			area.setAttribute('aria-valuetext', `${Math.round(st.hsv.s * 100)}%, ${Math.round(st.hsv.v * 100)}%`);
 		},
 	};
@@ -149,9 +149,9 @@ export interface SliderOptions {
 /** Hue slider, horizontal or vertical */
 export function hue(host: PickerHost, o: SliderOptions = {}): Part {
 	const vertical = !!o.vertical;
-	const ptr = el('div', 'rcp-pointer', pointerEl(o.pointer));
-	const track = el('div', 'rcp-track', ptr);
-	const area = el('div', 'rcp-hue' + (vertical ? ' rcp-vertical' : ''), track);
+	const ptr = el('div', 'cpp-pointer', pointerEl(o.pointer));
+	const track = el('div', 'cpp-track', ptr);
+	const area = el('div', 'cpp-hue' + (vertical ? ' cpp-vertical' : ''), track);
 	sliderAria(area, host.options.t('Hue'), 0, 359, vertical);
 	const input = o.input || ((h: number, st: ColorState) => ({ h, s: st.hsl.s, l: st.hsl.l, a: st.hsl.a }));
 	let last: ColorInput | null = null;
@@ -180,9 +180,9 @@ export function hue(host: PickerHost, o: SliderOptions = {}): Part {
 /** Alpha slider over a checkerboard */
 export function alpha(host: PickerHost, o: SliderOptions = {}): Part {
 	const vertical = !!o.vertical;
-	const ptr = el('div', 'rcp-pointer', pointerEl(o.pointer));
-	const track = el('div', 'rcp-track', ptr);
-	const area = el('div', 'rcp-alpha' + (vertical ? ' rcp-vertical' : ''), el('div', 'rcp-checker'), el('div', 'rcp-alpha-gradient'), track);
+	const ptr = el('div', 'cpp-pointer', pointerEl(o.pointer));
+	const track = el('div', 'cpp-track', ptr);
+	const area = el('div', 'cpp-alpha' + (vertical ? ' cpp-vertical' : ''), el('div', 'cpp-checker'), el('div', 'cpp-alpha-gradient'), track);
 	sliderAria(area, host.options.t('Alpha'), 0, 100, vertical);
 	let last: ColorInput | null = null;
 	const set = (a: number, final: boolean) => {
@@ -202,7 +202,7 @@ export function alpha(host: PickerHost, o: SliderOptions = {}): Part {
 		el: area,
 		update(st) {
 			const { r, g, b, a } = st.rgb;
-			setVar(area, '--rcp-rgb', `${r}, ${g}, ${b}`);
+			setVar(area, '--cpp-rgb', `${r}, ${g}, ${b}`);
 			setVar(ptr, vertical ? 'top' : 'left', round(a * 100) + '%');
 			area.setAttribute('aria-valuenow', String(Math.round(a * 100)));
 		},
@@ -232,16 +232,16 @@ export interface Field {
 
 /** react-color's EditableInput: a text field that does not overwrite what is being typed */
 export function field(o: FieldOptions): Field {
-	const input = el('input', 'rcp-input');
+	const input = el('input', 'cpp-input');
 	input.type = 'text';
 	input.spellcheck = false;
 	input.autocomplete = 'off';
-	input.id = 'rcp-f' + ++fieldId;
-	const wrap = el('div', 'rcp-field' + (o.cls ? ' ' + o.cls : ''), input);
+	input.id = 'cpp-f' + ++fieldId;
+	const wrap = el('div', 'cpp-field' + (o.cls ? ' ' + o.cls : ''), input);
 	if(o.ariaLabel) input.setAttribute('aria-label', o.ariaLabel);
 	let label: HTMLLabelElement | null = null;
 	if(o.label) {
-		label = el('label', 'rcp-label', o.label);
+		label = el('label', 'cpp-label', o.label);
 		label.htmlFor = input.id;
 		wrap.append(label);
 	}
@@ -272,7 +272,7 @@ export function field(o: FieldOptions): Field {
 	});
 	if(label && o.dragMax !== undefined) {
 		const max = o.dragMax;
-		label.classList.add('rcp-drag');
+		label.classList.add('cpp-drag');
 		label.addEventListener('pointerdown', (e) => {
 			if(e.button !== 0) return;
 			e.preventDefault();
@@ -316,14 +316,14 @@ export interface SwatchOptions {
 
 /** A colour button */
 export function swatch(color: string, o: SwatchOptions, ...children: Child[]): HTMLButtonElement {
-	const b = el('button', 'rcp-swatch' + (o.cls ? ' ' + o.cls : ''), ...children);
+	const b = el('button', 'cpp-swatch' + (o.cls ? ' ' + o.cls : ''), ...children);
 	b.type = 'button';
 	b.title = o.title || color;
 	b.setAttribute('aria-label', o.title || color);
 	b.dataset.color = color.toLowerCase();
-	setVar(b, '--rcp-swatch', color);
-	setVar(b, '--rcp-contrast', contrasting(color));
-	if(color.toLowerCase() === 'transparent') b.append(el('span', 'rcp-checker'));
+	setVar(b, '--cpp-swatch', color);
+	setVar(b, '--cpp-contrast', contrasting(color));
+	if(color.toLowerCase() === 'transparent') b.append(el('span', 'cpp-checker'));
 	b.addEventListener('click', () => o.onPick(color));
 	return b;
 }
@@ -335,7 +335,7 @@ export function swatch(color: string, o: SwatchOptions, ...children: Child[]): H
 export function roving(group: HTMLElement, label: string): (active: HTMLElement | null) => void {
 	group.setAttribute('role', 'group');
 	group.setAttribute('aria-label', label);
-	const buttons = () => Array.from(group.querySelectorAll<HTMLButtonElement>('button.rcp-swatch'));
+	const buttons = () => Array.from(group.querySelectorAll<HTMLButtonElement>('button.cpp-swatch'));
 	group.addEventListener('keydown', (e) => {
 		const list = buttons();
 		const i = list.indexOf(e.target as HTMLButtonElement);
@@ -362,9 +362,9 @@ export function roving(group: HTMLElement, label: string): (active: HTMLElement 
 /** Mark the swatch of a hex active (aria-pressed and class); the active one, or null */
 export function markActive(group: HTMLElement, hex: string | null): HTMLElement | null {
 	let found: HTMLElement | null = null;
-	group.querySelectorAll<HTMLElement>('button.rcp-swatch').forEach((b) => {
+	group.querySelectorAll<HTMLElement>('button.cpp-swatch').forEach((b) => {
 		const on = hex !== null && b.dataset.color === hex;
-		b.classList.toggle('rcp-active', on);
+		b.classList.toggle('cpp-active', on);
 		b.setAttribute('aria-pressed', on ? 'true' : 'false');
 		if(on && !found) found = b;
 	});
@@ -396,6 +396,6 @@ export function hexChange(host: PickerHost, value: string, final: boolean): void
 
 /** A slider's pointer; Photoshop's is two triangles, each with a white inside */
 function pointerEl(name = 'bar'): HTMLElement {
-	if(name !== 'triangles') return el('div', 'rcp-ptr-' + name);
-	return el('div', 'rcp-ptr-triangles', el('div', 'l', el('div', 'i')), el('div', 'r', el('div', 'i')));
+	if(name !== 'triangles') return el('div', 'cpp-ptr-' + name);
+	return el('div', 'cpp-ptr-triangles', el('div', 'l', el('div', 'i')), el('div', 'r', el('div', 'i')));
 }

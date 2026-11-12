@@ -30,7 +30,7 @@ export default {
 			el: root,
 			update(st, empty) {
 				focusable(markActive(colors, empty ? null : st.hex));
-				setVar(active, '--rcp-active', st.hex);
+				setVar(active, '--cpp-active', st.hex);
 				f.hex.set(st.hex);
 				f.r.set(st.rgb.r);
 				f.g.set(st.rgb.g);

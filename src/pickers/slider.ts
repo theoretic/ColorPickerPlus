@@ -28,7 +28,7 @@ export default {
 				buttons.forEach((b, i) => {
 					const l = OFFSETS[i];
 					const on = !empty && Math.abs(st.hsl.l - l) < 0.1 && Math.abs(st.hsl.s - 0.5) < 0.1;
-					setVar(b, '--rcp-swatch', `hsl(${Math.round(st.hsl.h)}, 50%, ${l * 100}%)`);
+					setVar(b, '--cpp-swatch', `hsl(${Math.round(st.hsl.h)}, 50%, ${l * 100}%)`);
 					b.classList.toggle('active', on);
 					b.setAttribute('aria-pressed', on ? 'true' : 'false');
 				});

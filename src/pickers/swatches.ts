@@ -32,7 +32,7 @@ export default {
 		for(const group of groups(host.options.colors)) {
 			const g = el('div', 'group');
 			for(const c of group) {
-				const b = swatch(c, { onPick: (hex) => host.change({ hex }, true) }, el('span', 'check', icon(ICON_CHECK, 'rcp-icon')));
+				const b = swatch(c, { onPick: (hex) => host.change({ hex }, true) }, el('span', 'check', icon(ICON_CHECK, 'cpp-icon')));
 				if(c.toLowerCase() === '#ffffff') b.classList.add('white');
 				g.append(b);
 			}

@@ -58,8 +58,8 @@ export default {
 			update(st) {
 				sat.update(st);
 				h.update(st);
-				setVar(fresh, '--rcp-new', `rgb(${st.rgb.r}, ${st.rgb.g}, ${st.rgb.b})`);
-				setVar(current, '--rcp-current', host.initial().hex);
+				setVar(fresh, '--cpp-new', `rgb(${st.rgb.r}, ${st.rgb.g}, ${st.rgb.b})`);
+				setVar(current, '--cpp-current', host.initial().hex);
 				f.h.set(Math.round(st.hsv.h));
 				f.s.set(Math.round(st.hsv.s * 100));
 				f.v.set(Math.round(st.hsv.v * 100));

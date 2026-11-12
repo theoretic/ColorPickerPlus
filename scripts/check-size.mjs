@@ -12,7 +12,7 @@ const check = (file, kind) => {
 	if(!ok) failed++;
 	console.log(`${ok ? 'ok  ' : 'OVER'} ${file.padEnd(34)} ${String(size).padStart(6)} B gzip (${kind} budget ${budgets[kind]})`);
 };
-check('rcp.js', 'entry');
+check('color-picker-plus.js', 'entry');
 for(const f of readdirSync(new URL('pickers/', dist)).sort()) {
 	const name = f.replace(/-[\w-]{8}\.js$/, '');
 	check('pickers/' + f, pickers.includes(name) ? 'picker' : 'shared');

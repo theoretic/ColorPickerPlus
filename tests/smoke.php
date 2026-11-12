@@ -1,7 +1,7 @@
 <?php namespace ProcessWire;
 
 /**
- * Smoke test of InputfieldReactColorPicker on a Bridge sandbox (installed there).
+ * Smoke test of InputfieldColorPickerPlus on a Bridge sandbox (installed there).
  *
  * Usage: php tests/smoke.php <bridge repo> <sandbox root>
  * Behind the Bridge sandbox guard. Exit code = failed checks.
@@ -27,13 +27,13 @@ function check($name, $ok, $info = '') {
 }
 
 $modules = wire('modules');
-check('module installed', $modules->isInstalled('InputfieldReactColorPicker'));
-$info = InputfieldReactColorPicker::getModuleInfo();
+check('module installed', $modules->isInstalled('InputfieldColorPickerPlus'));
+$info = InputfieldColorPickerPlus::getModuleInfo();
 check('version matches the CHANGELOG', strpos((string) file_get_contents($dir . 'CHANGELOG.md'), '## ' . $info['version']) !== false, $info['version']);
 check('version matches package.json', json_decode(file_get_contents($dir . 'package.json'), true)['version'] === $info['version']);
 
 // normalize(): the server's copy of the client's formats
-$n = function($v, $f = 'hex', $a = false) { return InputfieldReactColorPicker::normalize($v, $f, $a); };
+$n = function($v, $f = 'hex', $a = false) { return InputfieldColorPickerPlus::normalize($v, $f, $a); };
 check('hex lower case', $n('#4A90E2') === '#4a90e2');
 check('hex 3', $n('#fff') === '#ffffff');
 check('empty stays empty', $n('  ') === '');
@@ -46,21 +46,21 @@ check('hsl()', $n('#ff0000', 'hsl') === 'hsl(0, 100%, 50%)' && $n('hsl(120, 100%
 check('hsla()', $n('hsla(210, 50%, 50%, .25)', 'hsl', true) === 'hsla(210, 50%, 50%, 0.25)', (string) $n('hsla(210, 50%, 50%, .25)', 'hsl', true));
 
 // the thirteen pickers: a source file, a built chunk and a screenshot each
-$pickers = array_keys(InputfieldReactColorPicker::pickers());
+$pickers = array_keys(InputfieldColorPickerPlus::pickers());
 check('thirteen pickers', count($pickers) === 13);
 $dist = glob($dir . 'assets/dist/pickers/*.js');
 foreach($pickers as $p) {
 	$chunk = preg_grep('!/' . $p . '-[\w-]+\.js$!', $dist);
 	check("picker $p: source, one chunk, preview", is_file($dir . "src/pickers/$p.ts") && count($chunk) === 1 && is_file($dir . "assets/previews/$p.png"));
 }
-check('rcp.js built', is_file($dir . 'assets/dist/rcp.js'));
-$bc = $modules->get('InputfieldReactColorPicker')->getBridgeComponent();
-check('Bridge component: tag and module', $bc['tag'] === 'rcp-color-picker' && is_file($dir . preg_replace('/\?.*$/', '', $bc['module'])));
-check('implements BridgeComponent when Bridge is there', !interface_exists('ProcessWire\BridgeComponent', false) || $modules->get('InputfieldReactColorPicker') instanceof BridgeComponent);
-check('is a text input for FieldtypeText', $modules->get('InputfieldReactColorPicker') instanceof InputfieldHasTextValue);
+check('color-picker-plus.js built', is_file($dir . 'assets/dist/color-picker-plus.js'));
+$bc = $modules->get('InputfieldColorPickerPlus')->getBridgeComponent();
+check('Bridge component: tag and module', $bc['tag'] === 'color-picker-plus' && is_file($dir . preg_replace('/\?.*$/', '', $bc['module'])));
+check('implements BridgeComponent when Bridge is there', !interface_exists('ProcessWire\BridgeComponent', false) || $modules->get('InputfieldColorPickerPlus') instanceof BridgeComponent);
+check('is a text input for FieldtypeText', $modules->get('InputfieldColorPickerPlus') instanceof InputfieldHasTextValue);
 
 // render()
-$f = $modules->get('InputfieldReactColorPicker');
+$f = $modules->get('InputfieldColorPickerPlus');
 $f->attr('name', 'accent');
 $f->label = 'Accent <b>';
 $f->val('#ff6900');
@@ -69,13 +69,13 @@ $f->alpha = 1;
 $f->emptyColor = '#2563EB';
 $f->colors = "#ff0000\nnot a colour\n#00ff00";
 $out = $f->render();
-check('render: element wraps the input', (bool) preg_match('!^<rcp-color-picker [^>]*><input [^>]*name="accent"[^>]*/></rcp-color-picker>$!', $out), $out);
+check('render: element wraps the input', (bool) preg_match('!^<color-picker-plus [^>]*><input [^>]*name="accent"[^>]*/></color-picker-plus>$!', $out), $out);
 check('render: picker, alpha, placeholder, palette', strpos($out, "picker='chrome'") !== false && strpos($out, ' alpha') !== false &&
 	strpos($out, "placeholder='#2563eb'") !== false && strpos($out, "colors='[&quot;#ff0000&quot;,&quot;#00ff00&quot;]'") !== false, $out);
 check('render: label escaped', strpos($out, 'Accent &lt;b&gt;') !== false);
 check('render: no style attribute, no script', stripos($out, 'style=') === false && stripos($out, '<script') === false);
 check('render: unknown picker falls back to sketch', (function() use($modules) {
-	$g = $modules->get('InputfieldReactColorPicker');
+	$g = $modules->get('InputfieldColorPickerPlus');
 	$g->attr('name', 'x');
 	$g->picker = 'nope';
 	return strpos($g->render(), "picker='sketch'") !== false;
@@ -83,7 +83,7 @@ check('render: unknown picker falls back to sketch', (function() use($modules) {
 
 // processInput()
 $post = function($value, array $settings = array()) use($modules) {
-	$g = $modules->get('InputfieldReactColorPicker');
+	$g = $modules->get('InputfieldColorPickerPlus');
 	$g->attr('name', 'c');
 	$g->val('#111111');
 	foreach($settings as $k => $v) $g->set($k, $v);
@@ -106,9 +106,9 @@ check('renderValue: swatch without style attribute', strpos($rv, "fill='#ff6900'
 
 // settings
 $wrapper = $f->getConfigInputfields();
-check('settings: gallery, preview, own settings', $wrapper->getChildByName('_rcpGallery') && $wrapper->getChildByName('_rcpPreview') &&
+check('settings: gallery, preview, own settings', $wrapper->getChildByName('_cppGallery') && $wrapper->getChildByName('_cppPreview') &&
 	$wrapper->getChildByName('picker') && $wrapper->getChildByName('format') && $wrapper->getChildByName('emptyColor'));
 check('settings: text-only settings removed', !$wrapper->getChildByName('pattern') && !$wrapper->getChildByName('maxlength'));
-check('settings: 13 gallery radios', substr_count($wrapper->getChildByName('_rcpGallery')->value, 'data-rcp-gallery') === 13);
+check('settings: 13 gallery radios', substr_count($wrapper->getChildByName('_cppGallery')->value, 'data-cpp-gallery') === 13);
 
 exit($failed);

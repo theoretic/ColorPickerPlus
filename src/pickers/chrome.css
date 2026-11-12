@@ -1,5 +1,5 @@
 .chrome-picker {
-	width: 225px; box-sizing: content-box; background: var(--rcp-bg); color: var(--rcp-fg); border-radius: 2px;
+	width: 225px; box-sizing: content-box; background: var(--cpp-bg); color: var(--cpp-fg); border-radius: 2px;
 	box-shadow: 0 0 2px rgba(0, 0, 0, .3), 0 4px 8px rgba(0, 0, 0, .3); font-family: Menlo, ui-monospace, monospace;
 }
 .saturation { position: relative; width: 100%; padding-bottom: 55%; overflow: hidden; border-radius: 2px 2px 0 0; }
@@ -8,7 +8,7 @@
 .color { width: 32px; }
 .swatch { position: relative; width: 16px; height: 16px; margin-top: 6px; border-radius: 8px; overflow: hidden; }
 .swatch > * { position: absolute; inset: 0; border-radius: 8px; }
-.active { z-index: 2; background: var(--rcp-active); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); }
+.active { z-index: 2; background: var(--cpp-active); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); }
 .toggles { flex: 1; }
 .hue { position: relative; height: 10px; margin-bottom: 8px; }
 .alpha { position: relative; height: 10px; }
@@ -19,18 +19,18 @@
 .views { flex: 1; }
 .view { display: flex; margin-left: -6px; }
 .view[hidden] { display: none; }
-.view .rcp-field { width: 100%; padding-left: 6px; }
-.view .rcp-input {
-	box-sizing: border-box; width: 100%; height: 21px; font-size: 11px; color: var(--rcp-fg); text-align: center;
-	border: none; border-radius: 2px; box-shadow: inset 0 0 0 1px var(--rcp-input-line);
+.view .cpp-field { width: 100%; padding-left: 6px; }
+.view .cpp-input {
+	box-sizing: border-box; width: 100%; height: 21px; font-size: 11px; color: var(--cpp-fg); text-align: center;
+	border: none; border-radius: 2px; box-shadow: inset 0 0 0 1px var(--cpp-input-line);
 }
-.view .rcp-label {
+.view .cpp-label {
 	display: block; margin-top: 12px; font-size: 11px; line-height: 11px; text-align: center; text-transform: uppercase;
 }
 .toggle-wrap { position: relative; width: 32px; text-align: right; }
 .toggle {
 	margin: 10px -4px 0 0; padding: 2px 0; width: 24px; height: 28px; border: 0; border-radius: 4px; cursor: pointer;
-	background: transparent; color: var(--rcp-fg);
+	background: transparent; color: var(--cpp-fg);
 }
-.toggle:hover, .toggle:focus-visible { background: var(--rcp-hover); outline: none; }
-.toggle .rcp-icon { margin: 0 auto; }
+.toggle:hover, .toggle:focus-visible { background: var(--cpp-hover); outline: none; }
+.toggle .cpp-icon { margin: 0 auto; }

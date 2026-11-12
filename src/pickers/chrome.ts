@@ -46,7 +46,7 @@ export default {
 			hsl: el('div', 'view', f.h.el, f.s.el, f.l.el, withAlpha && f.ha.el),
 		};
 		let view: View = 'hex';
-		const toggle = el('button', 'toggle', icon(ICON_UNFOLD, 'rcp-icon'));
+		const toggle = el('button', 'toggle', icon(ICON_UNFOLD, 'cpp-icon'));
 		toggle.type = 'button';
 		toggle.setAttribute('aria-label', t('Switch between hex, RGB and HSL'));
 		const show = () => {
@@ -62,7 +62,7 @@ export default {
 			el('div', 'saturation', sat.el),
 			el('div', 'body',
 				el('div', 'controls',
-					el('div', 'color', el('div', 'swatch', active, el('div', 'rcp-checker'))),
+					el('div', 'color', el('div', 'swatch', active, el('div', 'cpp-checker'))),
 					el('div', 'toggles', el('div', 'hue', h.el), withAlpha && el('div', 'alpha', a.el))),
 				el('div', 'fields', el('div', 'views', views.hex, views.rgb, views.hsl), el('div', 'toggle-wrap', toggle))));
 		return {
@@ -75,7 +75,7 @@ export default {
 				sat.update(st);
 				h.update(st);
 				a.update(st);
-				setVar(active, '--rcp-active', cssColor(st));
+				setVar(active, '--cpp-active', cssColor(st));
 				f.hex.set(st.hex);
 				f.r.set(st.rgb.r);
 				f.g.set(st.rgb.g);

@@ -20,22 +20,22 @@ if(!interface_exists('ProcessWire\BridgeComponent', false)) {
 	}
 }
 if(interface_exists('ProcessWire\BridgeComponent', false)) {
-	interface InputfieldReactColorPickerBridge extends BridgeComponent {}
+	interface InputfieldColorPickerPlusBridge extends BridgeComponent {}
 } else {
-	interface InputfieldReactColorPickerBridge {}
+	interface InputfieldColorPickerPlusBridge {}
 }
 
 /**
  * Colour picker Inputfield: the pickers of react-color as a native web component
  *
  * A text input (the value: '#rrggbb', '#rrggbbaa', rgb() or hsl(), or '' for "no colour") inside
- * <rcp-color-picker>, which opens one of react-color's thirteen pickers. Only the picker the field
- * uses is downloaded. No React, no jQuery: assets/dist/rcp.js is a plain ES module.
+ * <color-picker-plus>, which opens one of react-color's thirteen pickers. Only the picker the field
+ * uses is downloaded. No React, no jQuery: assets/dist/color-picker-plus.js is a plain ES module.
  *
  * Usable as the input of a Text field (FieldtypeText, "Input module"), and anywhere an Inputfield
  * goes (module config screens, forms built in code):
  *
- *   $f = $modules->get('InputfieldReactColorPicker');
+ *   $f = $modules->get('InputfieldColorPickerPlus');
  *   $f->attr('name', 'accent');
  *   $f->val('#ff6900');
  *   $f->picker = 'chrome';       // see pickers()
@@ -54,13 +54,13 @@ if(interface_exists('ProcessWire\BridgeComponent', false)) {
  * @property string $colors The palette of the palette pickers, one colour per line (blank: the picker's own)
  *
  */
-class InputfieldReactColorPicker extends InputfieldText implements InputfieldHasTextValue, InputfieldReactColorPickerBridge {
+class InputfieldColorPickerPlus extends InputfieldText implements InputfieldHasTextValue, InputfieldColorPickerPlusBridge {
 
 	const version = '1.0.0';
 
 	public static function getModuleInfo() {
 		return array(
-			'title' => 'Colour picker (react-color)',
+			'title' => 'ColorPickerPlus',
 			'version' => self::version,
 			'summary' => 'Colour input with the pickers of react-color (Sketch, Chrome, Photoshop, Compact, Circle, Twitter and more), without React or jQuery.',
 			'icon' => 'tint',
@@ -80,8 +80,8 @@ class InputfieldReactColorPicker extends InputfieldText implements InputfieldHas
 	 */
 	public function getBridgeComponent() {
 		return array(
-			'tag' => 'rcp-color-picker',
-			'module' => 'assets/dist/rcp.js?v=' . rawurlencode(self::version),
+			'tag' => 'color-picker-plus',
+			'module' => 'assets/dist/color-picker-plus.js?v=' . rawurlencode(self::version),
 			'version' => '1',
 		);
 	}
@@ -351,14 +351,14 @@ class InputfieldReactColorPicker extends InputfieldText implements InputfieldHas
 	 */
 	public static function addAssets(ProcessWire $wire) {
 		$config = $wire->config;
-		$url = $config->urls('InputfieldReactColorPicker');
+		$url = $config->urls('InputfieldColorPickerPlus');
 		$v = '?v=' . rawurlencode(self::version);
-		$config->scripts->add($url . 'InputfieldReactColorPicker.js' . $v);
-		$config->styles->add($url . 'InputfieldReactColorPicker.css' . $v);
+		$config->scripts->add($url . 'InputfieldColorPickerPlus.js' . $v);
+		$config->styles->add($url . 'InputfieldColorPickerPlus.css' . $v);
 	}
 
 	/**
-	 * The <rcp-color-picker> attributes of this field
+	 * The <color-picker-plus> attributes of this field
 	 *
 	 * @return array
 	 *
@@ -397,7 +397,7 @@ class InputfieldReactColorPicker extends InputfieldText implements InputfieldHas
 	}
 
 	/**
-	 * The text input inside <rcp-color-picker>
+	 * The text input inside <color-picker-plus>
 	 *
 	 * @return string
 	 *
@@ -410,9 +410,9 @@ class InputfieldReactColorPicker extends InputfieldText implements InputfieldHas
 		$this->attr('maxlength', 40);
 		$emptyLabel = (string) $this->get('emptyLabel') !== '' ? (string) $this->get('emptyLabel') : '';
 		if(!$this->attr('placeholder') && $emptyLabel !== '') $this->attr('placeholder', $emptyLabel);
-		$this->addClass('InputfieldReactColorPickerInput');
+		$this->addClass('InputfieldColorPickerPlusInput');
 		$input = parent::___render();
-		return "<rcp-color-picker" . $this->attrString($this->elementAttrs()) . ">$input</rcp-color-picker>";
+		return "<color-picker-plus" . $this->attrString($this->elementAttrs()) . ">$input</color-picker-plus>";
 	}
 
 	/**
@@ -426,12 +426,12 @@ class InputfieldReactColorPicker extends InputfieldText implements InputfieldHas
 		$value = (string) $this->val();
 		if($value === '') {
 			$label = (string) $this->get('emptyLabel') !== '' ? (string) $this->get('emptyLabel') : $this->_('Default');
-			return "<span class='InputfieldReactColorPickerValue'>" . $e->entities($label) . "</span>";
+			return "<span class='InputfieldColorPickerPlusValue'>" . $e->entities($label) . "</span>";
 		}
 		$c = self::parseColor($value);
 		$fill = $c ? sprintf('#%02x%02x%02x', (int) round($c[0]), (int) round($c[1]), (int) round($c[2])) : '#000000';
 		$opacity = $c ? self::num($c[3]) : '1';
-		return "<span class='InputfieldReactColorPickerValue'>" .
+		return "<span class='InputfieldColorPickerPlusValue'>" .
 			"<svg width='16' height='16' viewBox='0 0 16 16' aria-hidden='true'><rect x='.5' y='.5' width='15' height='15' rx='3' fill='$fill' fill-opacity='$opacity' stroke='rgba(0,0,0,.2)'/></svg> " .
 			$e->entities($value) . "</span>";
 	}
@@ -485,7 +485,7 @@ class InputfieldReactColorPicker extends InputfieldText implements InputfieldHas
 
 		/** @var InputfieldFieldset $fs */
 		$fs = $modules->get('InputfieldFieldset');
-		$fs->attr('name', '_rcpPicker');
+		$fs->attr('name', '_cppPicker');
 		$fs->label = $this->_('Colour picker');
 		$fs->icon = 'tint';
 		$inputfields->prepend($fs);
@@ -500,28 +500,28 @@ class InputfieldReactColorPicker extends InputfieldText implements InputfieldHas
 		$items = '';
 		foreach(self::pickers() as $name => $label) {
 			$checked = $name === $this->pickerName() ? ' checked' : '';
-			$src = $this->wire()->config->urls('InputfieldReactColorPicker') . "assets/previews/$name.png?v=" . rawurlencode(self::version);
-			$items .= "<label class='rcp-gallery-item'><span class='rcp-gallery-name'>" .
-				"<input type='radio' name='picker' value='$name' data-rcp-gallery$checked>" . $e->entities($label) . "</span>" .
-				"<span class='rcp-gallery-shot'><img src='" . $e->entities($src) . "' alt='' loading='lazy'></span></label>";
+			$src = $this->wire()->config->urls('InputfieldColorPickerPlus') . "assets/previews/$name.png?v=" . rawurlencode(self::version);
+			$items .= "<label class='cpp-gallery-item'><span class='cpp-gallery-name'>" .
+				"<input type='radio' name='picker' value='$name' data-cpp-gallery$checked>" . $e->entities($label) . "</span>" .
+				"<span class='cpp-gallery-shot'><img src='" . $e->entities($src) . "' alt='' loading='lazy'></span></label>";
 		}
 		/** @var InputfieldMarkup $f */
 		$f = $modules->get('InputfieldMarkup');
-		$f->attr('name', '_rcpGallery');
+		$f->attr('name', '_cppGallery');
 		$f->label = $this->_('Picker');
 		$f->description = $this->_('Screenshots of the thirteen pickers of react-color. The chosen one is shown live below; only that one is loaded on the page.');
-		$f->value = "<div class='rcp-gallery' role='radiogroup'>$items</div>";
+		$f->value = "<div class='cpp-gallery' role='radiogroup'>$items</div>";
 		$fs->add($f);
 
 		/** @var InputfieldMarkup $f */
 		$f = $modules->get('InputfieldMarkup');
-		$f->attr('name', '_rcpPreview');
+		$f->attr('name', '_cppPreview');
 		$f->label = $this->_('Try it');
 		$attrs = $this->elementAttrs();
 		$attrs['mode'] = 'inline';
-		$attrs['data-rcp-preview'] = '';
-		$f->value = "<rcp-color-picker" . $this->attrString($attrs) . "><input type='text' class='uk-input' size='22' aria-label='" .
-			$e->entities($this->_('Preview')) . "' value='#4a90e2' form='rcp-none'></rcp-color-picker>";
+		$attrs['data-cpp-preview'] = '';
+		$f->value = "<color-picker-plus" . $this->attrString($attrs) . "><input type='text' class='uk-input' size='22' aria-label='" .
+			$e->entities($this->_('Preview')) . "' value='#4a90e2' form='cpp-none'></color-picker-plus>";
 		$f->notes = $this->_('Settings other than the picker show here after saving.');
 		$fs->add($f);
 

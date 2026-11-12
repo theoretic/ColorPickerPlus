@@ -1,4 +1,4 @@
-import { PICKERS } from '../assets/dist/rcp.js';
+import { PICKERS } from '../assets/dist/color-picker-plus.js';
 
 const q = new URLSearchParams(location.search);
 const only = q.get('picker');
@@ -15,7 +15,7 @@ for(const name of only ? [only] : PICKERS) {
 	const label = document.createElement('label');
 	label.textContent = name;
 	label.htmlFor = 'f-' + name;
-	const picker = document.createElement('rcp-color-picker');
+	const picker = document.createElement('color-picker-plus');
 	picker.setAttribute('picker', name);
 	picker.setAttribute('label', name);
 	picker.setAttribute('allow-empty', '');
@@ -31,4 +31,4 @@ for(const name of only ? [only] : PICKERS) {
 	form.append(row);
 	input.addEventListener('change', () => (log.textContent = `change ${name} = ${input.value}\n` + log.textContent));
 }
-window.demoReady = Promise.all([...document.querySelectorAll('rcp-color-picker')].map((p) => (inline ? p.ready() : Promise.resolve())));
+window.demoReady = Promise.all([...document.querySelectorAll('color-picker-plus')].map((p) => (inline ? p.ready() : Promise.resolve())));

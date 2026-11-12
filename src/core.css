@@ -1,53 +1,53 @@
-/* <rcp-color-picker>: the swatch button, the clear button and the popover. The --rcp-* tokens take
+/* <color-picker-plus>: the swatch button, the clear button and the popover. The --cpp-* tokens take
    Bridge's tokens where the page has them (custom properties inherit into the shadow root), else
    react-color's own light colours. */
 :host {
 	display: inline-block; vertical-align: middle; max-width: 100%;
-	--rcp-bg: var(--popover, #fff);
-	--rcp-fg: var(--popover-foreground, #222);
-	--rcp-line: var(--border, #eee);
-	--rcp-input-line: var(--input, #ccc);
-	--rcp-input-bg: transparent;
-	--rcp-muted: var(--muted-foreground, #969696);
-	--rcp-muted-bg: var(--muted, #f6f6f6);
-	--rcp-hover: var(--accent, #eee);
-	--rcp-ring: var(--ring, #2563eb);
+	--cpp-bg: var(--popover, #fff);
+	--cpp-fg: var(--popover-foreground, #222);
+	--cpp-line: var(--border, #eee);
+	--cpp-input-line: var(--input, #ccc);
+	--cpp-input-bg: transparent;
+	--cpp-muted: var(--muted-foreground, #969696);
+	--cpp-muted-bg: var(--muted, #f6f6f6);
+	--cpp-hover: var(--accent, #eee);
+	--cpp-ring: var(--ring, #2563eb);
 }
 :host([hidden]) { display: none; }
 .control { display: inline-flex; align-items: center; gap: .375rem; max-width: 100%; }
 .swatch {
 	flex: none; box-sizing: border-box; width: 2.25rem; height: 2.25rem; padding: 4px; margin: 0; cursor: pointer;
-	border: 1px solid var(--rcp-input-line); border-radius: var(--radius, 6px); background: var(--pw-input-bg, var(--background, #fff));
+	border: 1px solid var(--cpp-input-line); border-radius: var(--radius, 6px); background: var(--pw-input-bg, var(--background, #fff));
 }
 .swatch[hidden] { display: none; }
-.swatch:focus-visible, .clear:focus-visible { outline: 2px solid var(--rcp-ring); outline-offset: 2px; }
+.swatch:focus-visible, .clear:focus-visible { outline: 2px solid var(--cpp-ring); outline-offset: 2px; }
 .swatch:disabled { cursor: not-allowed; opacity: .5; }
 .chip {
 	position: relative; display: block; width: 100%; height: 100%; overflow: hidden;
 	border-radius: max(2px, calc(var(--radius, 6px) - 4px)); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12);
-	background: linear-gradient(var(--rcp-chip), var(--rcp-chip)),
+	background: linear-gradient(var(--cpp-chip), var(--cpp-chip)),
 		#fff repeating-conic-gradient(rgba(0, 0, 0, .08) 0 25%, transparent 0 50%) 0 0 / 8px 8px;
 }
 /* empty: the placeholder's colour, struck through */
 .empty .chip {
 	background: linear-gradient(to top right, transparent calc(50% - 1px), var(--destructive, #e7000b) calc(50% - 1px),
 		var(--destructive, #e7000b) calc(50% + 1px), transparent calc(50% + 1px)),
-		linear-gradient(var(--rcp-chip), var(--rcp-chip)) center / 50% 50% no-repeat,
+		linear-gradient(var(--cpp-chip), var(--cpp-chip)) center / 50% 50% no-repeat,
 		#fff repeating-conic-gradient(rgba(0, 0, 0, .08) 0 25%, transparent 0 50%) 0 0 / 8px 8px;
 }
 .clear {
 	flex: none; width: 1.75rem; height: 1.75rem; padding: 0; margin: 0; cursor: pointer; font: inherit; font-size: 1.125rem;
 	line-height: 1; color: var(--muted-foreground, #6b6b6b); background: transparent; border: 0; border-radius: 4px;
 }
-.clear:hover { background: var(--rcp-hover); color: var(--foreground, #0a0a0a); }
+.clear:hover { background: var(--cpp-hover); color: var(--foreground, #0a0a0a); }
 .clear[hidden] { display: none; }
 .panel {
-	position: fixed; inset: auto; margin: 0; padding: 0; border: 0; overflow: visible; color: var(--rcp-fg);
+	position: fixed; inset: auto; margin: 0; padding: 0; border: 0; overflow: visible; color: var(--cpp-fg);
 	background: transparent; font-size: 12px; line-height: normal;
 }
 .panel.inline { position: static; display: block; margin-top: .5rem; }
 .picker { display: inline-block; vertical-align: top; text-align: left; }
 .panel:not(.inline) .picker.bare {
-	padding: 14px; background: var(--rcp-bg); border-radius: 6px;
+	padding: 14px; background: var(--cpp-bg); border-radius: 6px;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .15);
 }
