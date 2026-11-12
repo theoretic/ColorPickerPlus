@@ -1,0 +1,14 @@
+.github-picker {
+	position: relative; width: 200px; padding: 5px; box-sizing: content-box; background: var(--rcp-bg);
+	border: 1px solid rgba(0, 0, 0, .2); border-radius: 4px; box-shadow: 0 3px 12px rgba(0, 0, 0, .15);
+}
+.triangle, .triangle-shadow { display: none; position: absolute; }
+.triangle { top: -14px; left: 10px; border: 7px solid transparent; border-bottom-color: var(--rcp-bg); }
+.triangle-shadow { top: -16px; left: 9px; border: 8px solid transparent; border-bottom-color: rgba(0, 0, 0, .15); }
+:host([placement="below"]) .triangle, :host([placement="below"]) .triangle-shadow { display: block; }
+.colors { display: flex; flex-wrap: wrap; }
+.colors .rcp-swatch { width: 25px; height: 25px; }
+.colors .rcp-swatch:hover, .colors .rcp-swatch:focus-visible, .colors .rcp-swatch.rcp-active {
+	position: relative; z-index: 2; outline: 2px solid #fff; box-shadow: 0 0 5px 2px rgba(0, 0, 0, .25);
+}
+.colors .rcp-swatch:focus-visible { box-shadow: 0 0 5px 2px rgba(0, 0, 0, .25), 0 0 0 4px var(--rcp-ring); }

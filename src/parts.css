@@ -1,0 +1,83 @@
+/* Shared parts (react-color components/common, MIT, Case Sandberg). Colours go through the --rcp-*
+   tokens of core.css, which take Bridge's tokens where the page has them. */
+.rcp-pointer { position: absolute; left: 0; top: 0; pointer-events: none; }
+
+/* saturation */
+.rcp-sat {
+	position: absolute; inset: 0; overflow: hidden; cursor: crosshair; touch-action: none;
+	background: hsl(var(--rcp-hue, 0), 100%, 50%); border-radius: inherit; outline: none;
+}
+.rcp-sat-white, .rcp-sat-black { position: absolute; inset: 0; border-radius: inherit; }
+.rcp-sat-white { background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0)); }
+.rcp-sat-black { background: linear-gradient(to top, #000, rgba(0, 0, 0, 0)); box-shadow: var(--rcp-sat-shadow, none); }
+.rcp-sat-circle {
+	width: 4px; height: 4px; border-radius: 50%; transform: translate(-2px, -2px);
+	box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0, 0, 0, .3), 0 0 1px 2px rgba(0, 0, 0, .4);
+}
+.rcp-sat-ring { width: 12px; height: 12px; border-radius: 6px; transform: translate(-6px, -6px); box-shadow: inset 0 0 0 1px #fff; }
+.rcp-sat-ring.rcp-dark { box-shadow: var(--rcp-ring-dark, inset 0 0 0 1px #fff); }
+.rcp-sat:focus-visible .rcp-sat-circle, .rcp-sat:focus-visible .rcp-sat-ring { outline: 2px solid var(--rcp-ring); outline-offset: 2px; }
+
+/* hue and alpha */
+.rcp-hue, .rcp-alpha { position: absolute; inset: 0; border-radius: var(--rcp-slider-radius, 2px); outline: none; }
+.rcp-hue { box-shadow: var(--rcp-slider-shadow, none); }
+.rcp-hue .rcp-track {
+	position: relative; height: 100%; padding: 0 2px; border-radius: inherit; cursor: pointer; touch-action: none;
+	background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+}
+.rcp-hue.rcp-vertical .rcp-track {
+	padding: 0; background: linear-gradient(to top, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+}
+.rcp-alpha .rcp-checker { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
+.rcp-alpha-gradient {
+	position: absolute; inset: 0; border-radius: inherit; box-shadow: var(--rcp-slider-shadow, none);
+	background: linear-gradient(to right, rgba(var(--rcp-rgb, 0, 0, 0), 0) 0%, rgba(var(--rcp-rgb, 0, 0, 0), 1) 100%);
+}
+.rcp-alpha.rcp-vertical .rcp-alpha-gradient {
+	background: linear-gradient(to bottom, rgba(var(--rcp-rgb, 0, 0, 0), 0) 0%, rgba(var(--rcp-rgb, 0, 0, 0), 1) 100%);
+}
+.rcp-alpha .rcp-track { position: relative; height: 100%; margin: 0 3px; cursor: pointer; touch-action: none; }
+.rcp-vertical .rcp-pointer { left: 0; }
+.rcp-hue:focus-visible, .rcp-alpha:focus-visible { outline: 2px solid var(--rcp-ring); outline-offset: 2px; }
+
+.rcp-ptr-bar {
+	width: 4px; height: 8px; margin-top: 1px; border-radius: 1px; background: #fff;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .6); transform: translateX(-2px);
+}
+.rcp-ptr-chrome {
+	width: 12px; height: 12px; border-radius: 6px; transform: translate(-6px, -1px);
+	background: rgb(248, 248, 248); box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37);
+}
+.rcp-ptr-round {
+	width: 18px; height: 18px; border-radius: 50%; transform: translate(-9px, -1px);
+	background: rgb(248, 248, 248); box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37);
+}
+.rcp-vertical .rcp-ptr-round { transform: translate(-3px, -9px); }
+.rcp-ptr-slider {
+	width: 14px; height: 14px; border-radius: 6px; transform: translate(-7px, -1px);
+	background: rgb(248, 248, 248); box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37);
+}
+
+/* checkerboard (react-color drew it on a canvas: white, 8px squares of rgba(0,0,0,.08)) */
+.rcp-checker {
+	background: #fff repeating-conic-gradient(rgba(0, 0, 0, .08) 0 25%, transparent 0 50%) 0 0 / 16px 16px;
+}
+
+/* fields */
+.rcp-field { position: relative; min-width: 0; }
+.rcp-input {
+	box-sizing: content-box; font: inherit; color: var(--rcp-fg); background: var(--rcp-input-bg);
+	margin: 0; min-width: 0; outline: none;
+}
+.rcp-input:focus-visible { box-shadow: inset 0 0 0 1px var(--rcp-ring) !important; }
+.rcp-label { color: var(--rcp-muted); }
+.rcp-drag { cursor: ew-resize; user-select: none; touch-action: none; }
+
+/* swatches */
+.rcp-swatch {
+	position: relative; display: block; padding: 0; margin: 0; border: 0; font: inherit; cursor: pointer;
+	background: var(--rcp-swatch); outline: none; -webkit-appearance: none; appearance: none;
+}
+.rcp-swatch > .rcp-checker { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); }
+.rcp-swatch:focus-visible { box-shadow: 0 0 4px var(--rcp-swatch), 0 0 0 2px var(--rcp-ring); }
+.rcp-icon { display: block; width: 24px; height: 24px; fill: currentColor; }

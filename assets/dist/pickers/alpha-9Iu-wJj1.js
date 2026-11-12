@@ -1,0 +1,1 @@
+import{a as e,e as a,p}from"./parts-B8LogJMF.js";import"../rcp.js";const t={css:p+".alpha-picker{position:relative;width:316px;height:16px}",bare:!0,create(p){const t=e(p,{pointer:"round"});return{el:a("div","alpha-picker",t.el),update:e=>t.update(e)}}};export{t as default};

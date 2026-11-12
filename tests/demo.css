@@ -1,0 +1,12 @@
+body { font: 14px/1.4 system-ui, sans-serif; margin: 24px; background: #fff; color: #0a0a0a; }
+body.dark {
+	background: #0a0a0a; color: #fafafa;
+	--popover: #171717; --popover-foreground: #fafafa; --border: #2e2e2e; --input: #3a3a3a; --muted: #262626;
+	--muted-foreground: #a1a1a1; --accent: #262626; --background: #0a0a0a; --foreground: #fafafa;
+}
+.row { display: flex; align-items: flex-start; gap: 12px; margin: 0 0 20px; }
+.row > label { width: 90px; padding-top: 8px; font-weight: 600; }
+input[type=text] { font: inherit; height: 36px; box-sizing: border-box; padding: 0 8px; border: 1px solid #ccc; border-radius: 6px; width: 12em; background: inherit; color: inherit; }
+body.shot { margin: 0; padding: 16px 16px 16px 16px; background: transparent; }
+body.shot h1, body.shot p, body.shot pre { display: none; }
+body.shot .row > label { display: none; }

@@ -1,0 +1,19 @@
+{
+  "name": "reactcolorpicker",
+  "version": "1.0.0",
+  "description": "Colour picker Inputfield for ProcessWire: the pickers of react-color as a native web component",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build && node scripts/check-size.mjs",
+    "test": "node tests/color.test.ts",
+    "previews": "node scripts/previews.mjs"
+  },
+  "devDependencies": {
+    "terser": "^5.46.1",
+    "typescript": "~5.9.3",
+    "vite": "^6.4.3"
+  }
+}
