@@ -2,3 +2,16 @@
 *.png binary
 *.webp binary
 *.woff2 binary
+
+# left out of the download zip (GitHub's archive/main.zip, git archive); kept in the repo
+/src export-ignore
+/tests export-ignore
+/scripts export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore
+/tsconfig.json export-ignore
+/vite.config.ts export-ignore
+/PLAN.md export-ignore
+/.editorconfig export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
